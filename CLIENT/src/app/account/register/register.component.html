@@ -44,31 +44,46 @@
   </div>
 
   <div class="modal-body">
-    <form #registerForm="ngForm" (ngSubmit)="register()" autocomplete="off">
+    <form [formGroup]="registerForm" (ngSubmit)="registerForm.valid && register()" autocomplete="off">
         <h4 class="text-center text-primary">{{'lang.register' | translate}}</h4>
         <hr>
         <div class="form-group">
             <input 
-                name="displayName"
-                [(ngModel)]="model.displayName"
+                [class.is-invalid]="registerForm.get('displayName').errors && registerForm.get('displayName').touched"
+                formControlName="displayName"
                 class="form-control mb-2" 
                 type="text"
                 placeholder="{{'lang.name' | translate}}">
+              <div *ngIf="registerForm.get('password').hasError('required')" class="invalid-feedback mb-2">{{'lang.enterDisplayName' | translate}}</div>
+
             <input
-              name="email"
-              [(ngModel)]="model.email"
-              class="form-control mb-2" 
-              type="email" 
-              placeholder="{{'lang.email' | translate}}">
+                [class.is-invalid]="registerForm.get('email').errors && registerForm.get('email').touched"
+                formControlName="email"
+                class="form-control mb-2" 
+                type="email" 
+                placeholder="{{'lang.email' | translate}}">
+              <div *ngIf="registerForm.get('password').hasError('required')" class="invalid-feedback mb-2">{{'lang.enterEmail' | translate}}</div>
+
             <input 
-              name="password"
-              [(ngModel)]="model.password"
-              class="form-control mb-2" 
-              type="password" 
-              placeholder="{{'lang.password' | translate}}">
+                [class.is-invalid]="registerForm.get('password').errors && registerForm.get('password').touched"
+                formControlName="password"
+                class="form-control mb-2" 
+                type="password" 
+                placeholder="{{'lang.password' | translate}}">
+              <div *ngIf="registerForm.get('password').hasError('required')" class="invalid-feedback mb-2">{{'lang.enterPassword' | translate}}</div>
+              <div *ngIf="registerForm.get('password').hasError('pattern')" class="invalid-feedback mb-2">{{'lang.enterPattern' | translate}}</div>
+
+            <input 
+                [class.is-invalid]="registerForm.get('confirmPassword').errors && registerForm.get('confirmPassword').touched"
+                formControlName="confirmPassword"
+                class="form-control mb-2" 
+                type="password" 
+                placeholder="{{'lang.confirmPassword' | translate}}">
+              <div *ngIf="registerForm.get('confirmPassword').hasError('required')" class="invalid-feedback mb-2">{{'lang.enterConfirmPassword' | translate}}</div>
+              <div *ngIf="registerForm.get('confirmPassword').hasError('isMatching')" class="invalid-feedback mb-2">{{'lang.matchPasswords' | translate}}</div>
         </div>
         <div class="form-group text-center">
-            <button class="btn btn-outline-primary col-6 mt-4" type="submit">{{'lang.register' | translate}}</button>
+            <button [disabled]="!registerForm.valid" class="btn btn-outline-primary col-6 mt-4" type="submit">{{'lang.register' | translate}}</button>
         </div>
     </form>
   </div>

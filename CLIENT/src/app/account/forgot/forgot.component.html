@@ -6,21 +6,25 @@
   </div>
 
   <div class="modal-body">
-    <form #forgotForm="ngForm" (ngSubmit)="forgotPassword()" autocomplete="off">
+    <form [formGroup]="forgotForm" (ngSubmit)="forgotForm.valid && forgotPassword()" autocomplete="off">
         <h4 class="text-center text-primary">{{'lang.forgot' | translate}}</h4>
         <hr>
-        <p>{{'lang.forgotInfo' | translate}}</p>
+        <alert type="info">{{'lang.forgotInfo' | translate}}</alert>
         <div class="form-group">
             <input 
-              name="email"
-              [(ngModel)]="email"
+              [class.is-invalid]="forgotForm.get('email').errors && forgotForm.get('email').touched"
+              formControlName="email"
               class="form-control mb-2" 
               type="email" 
               placeholder="{{'lang.email' | translate}}">
         </div>
 
           <div class="form-group text-center">
-            <button class="btn btn-outline-primary col-6 mt-4" type="submit" (click)="closeModal()">{{'lang.submit' | translate}}</button>
+            <button [disabled]="!forgotForm.valid" class="btn btn-outline-primary col-6 mt-4" type="submit">{{'lang.submit' | translate}}</button>
           </div>
       </form>
+  </div>
+
+  <div class="text-center pb-3">
+    <a href="javascript:void(0);" (click)="openRegisterModal(); modalRef?.hide()">{{'lang.notYetAMember' | translate}}</a>
   </div>

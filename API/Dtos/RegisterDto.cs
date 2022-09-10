@@ -19,5 +19,8 @@ namespace API.Dtos
         [RegularExpression("(?=^.{6,50}$)(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\\s).*$",
                         ErrorMessage = "Password must have 1 uppercase, 1 lowercase, 1 number and be atleast 6 characters long!")]
         public string Password { get; set; }
+
+        [Required, Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        public string ConfirmPassword { get; set; } = string.Empty;
     }
 }

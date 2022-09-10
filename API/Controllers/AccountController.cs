@@ -182,7 +182,7 @@ namespace API.Controllers
 
             await _userManager.AddPasswordAsync(user, newPassword);//Set new password
             
-            return Ok("Password reset successfully!");
+            return Ok();
         }
 
         //Generates token for verification and password reset

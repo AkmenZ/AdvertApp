@@ -38,8 +38,8 @@ export class AccountService {
     )
   }
 
-  forgotPassword(email: string) {
-    return this.http.post(this.baseUrl + 'account/forgotpassword?userEmail=' + email, {});
+  forgotPassword(model: any) {
+    return this.http.post(this.baseUrl + 'account/forgotpassword?userEmail=' + model, {});
   }
 
   resetPassword(model: any) {

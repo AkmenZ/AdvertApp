@@ -1,7 +1,5 @@
 {
     "lang": {
-        "title": "Translation demo",
-        "text": "This is a simple demonstration app for ngx-translate",
         "placeAd": "Place Ad",
         "login": "Login",
         "register": "Register",
@@ -19,6 +17,8 @@
         "enterPassword": "Please enter password!",
         "enterConfirmPassword": "Please enter confirm password!",
         "matchPasswords": "Passwords must match!",
+        "enterDisplayName": "Please enter username!",
+        "enterEmail": "Please enter email!",
         "enterPattern": "Password must contain 1 upercase, 1 lowercase, 1 number and be at least 6 characters long!",
         "verifiedConfirmation": "Thank you for verification!",
         "verifiedInfo": "Your account is now ready!",

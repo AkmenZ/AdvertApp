@@ -1,67 +1,33 @@
-<!--<div class="container">
-    <div class="d-flex justify-content-center">
-
-      <form #loginForm="ngForm" (ngSubmit)="login()" autocomplete="off">
-        <h4 class="text-center text-primary">{{'lang.login' | translate}}</h4>
-        <hr>
-        <div class="form-group">
-            <input 
-              name="email"
-              [(ngModel)]="model.email"
-              class="form-control mb-2" 
-              type="email" 
-              placeholder="{{'lang.email' | translate}}">
-          <input 
-              name="password"
-              [(ngModel)]="model.password"
-              class="form-control mb-2" 
-              type="password" 
-              placeholder="{{'lang.password' | translate}}">
-        </div>
-
-          <div class="form-group text-center">
-            <button class="btn btn-outline-primary col-6 mt-4" type="submit">{{'lang.login' | translate}}</button>
-          </div>
-
-      </form>
-
-  </div>
-  <hr>
-  <div class="text-center pb-3">
-</div>-->
-
-<!--<button type="button" class="btn btn-primary" (click)="openModal(template)">Open modal</button>
-<br><br>
-<pre class="card card-block card-header" *ngFor="let message of messages">{{message}}</pre>-->
-
-  <div class="modal-header">
-    <h4 class="modal-title pull-left">mobo.lv</h4>
-    <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="closeModal()">
-      <span aria-hidden="true" class="visually-hidden">&times;</span>
-    </button>
-  </div>
+<div class="modal-header">
+  <h4 class="modal-title pull-left">mobo.lv</h4>
+  <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="closeModal()">
+    <span aria-hidden="true" class="visually-hidden">&times;</span>
+  </button>
+</div>
 
   <div class="modal-body">
-      <form #loginForm="ngForm" (ngSubmit)="login()" autocomplete="off">
+      <form [formGroup]="loginForm" (ngSubmit)="loginForm.valid && login()" autocomplete="off">
         <h4 class="text-center text-primary">{{'lang.login' | translate}}</h4>
         <hr>
         <div class="form-group">
             <input 
-              name="email"
-              [(ngModel)]="model.email"
+              [class.is-invalid]="loginForm.get('email').errors && loginForm.get('email').touched"
+              formControlName="email"
               class="form-control mb-2" 
               type="email" 
               placeholder="{{'lang.email' | translate}}">
+            <div *ngIf="loginForm.get('password').hasError('required')" class="invalid-feedback mb-2">{{'lang.enterEmail' | translate}}</div>
           <input 
-              name="password"
-              [(ngModel)]="model.password"
+              [class.is-invalid]="loginForm.get('password').errors && loginForm.get('password').touched"
+              formControlName="password"
               class="form-control mb-2" 
               type="password" 
               placeholder="{{'lang.password' | translate}}">
+            <div *ngIf="loginForm.get('password').hasError('required')" class="invalid-feedback mb-2">{{'lang.enterPassword' | translate}}</div>
         </div>
 
           <div class="form-group text-center">
-            <button class="btn btn-outline-primary col-6 mt-4" type="submit">{{'lang.login' | translate}}</button>
+            <button [disabled]="!loginForm.valid" class="btn btn-outline-primary col-6 mt-4" type="submit">{{'lang.login' | translate}}</button>
           </div>
       </form>
   </div>

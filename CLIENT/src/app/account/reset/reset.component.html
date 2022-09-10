@@ -1,14 +1,14 @@
 <div class="container" style="max-width: 300px;">
     <div class="justify-content-center">
 
-      <form [formGroup]="resetForm" (ngSubmit)="resetPassword(); onSubmit()" autocomplete="off">
+      <form [formGroup]="resetForm" (ngSubmit)="resetForm.valid && resetPassword(); onSubmit()" autocomplete="off">
 
         <div class="row">
           <div class="col-10">
             <h4 class="text-primary">{{'lang.reset' | translate}}</h4>
           </div>
           <div class="col-2">
-            <button type="button" class="btn btn-outline-primary"
+            <button type="button" class="btn btn-outline-primary mb-2"
                     (click)="showAlert = !showAlert">
                     <fa-icon [icon]="faInfoCircle"></fa-icon>
             </button>
@@ -17,7 +17,7 @@
     
         <div class="row justify-content-sm-center">
             <alert class="" *ngIf="showAlert" type="info">
-              <strong>Hej Nēģer!</strong> {{'lang.enterPattern' | translate}}
+              {{'lang.enterPattern' | translate}}
             </alert>
         </div>
 
@@ -44,17 +44,10 @@
         </div>
 
           <div class="form-group text-center">
-            <button class="btn btn-outline-primary col-6 mt-4" type="submit">{{'lang.confirm' | translate}}</button>
+            <button [disabled]="!resetForm.valid" class="btn btn-outline-primary col-6 mt-4" type="submit">{{'lang.confirm' | translate}}</button>
           </div>
       </form>
 
-  </div>
-
-  <hr>
-
-  <div class="text-center pb-3">
-    <p>Form value: {{resetForm.value | json}}</p>
-    <p>Form value: {{resetForm.status | json}}</p>
   </div>
 
 </div>
